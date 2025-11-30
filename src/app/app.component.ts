@@ -15,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
-          <li><a href="#">List Inventory</a></li>
+          <li><a href="/inventory">List Inventory</a></li>
         </ul>
       </nav>
       <main>
