@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
+/**
+ * List Inventory Component
+ * Displays all inventory items retrieved from the API.
+ */
+
 @Component({
   selector: 'app-list-inventory',
   standalone: true,
@@ -10,14 +15,17 @@ import { environment } from '../../../environments/environment';
   template: `
     <h1>Inventory Items</h1>
 
+    <!-- Display while data is loading -->
     @if (loading) {
       <p>Loading...</p>
     }
 
+    <!-- Display if an error occurs -->
     @if (errorMessage) {
       <p class="error">{{ errorMessage }}</p>
     }
 
+    <!-- Display table only after data is loaded -->
     @if (!loading && !errorMessage) {
       <table class="table">
         <thead>
@@ -31,6 +39,7 @@ import { environment } from '../../../environments/environment';
         </thead>
 
         <tbody>
+          <!-- Loop through each inventory item -->
           @for (item of items; track item._id) {
             <tr>
               <td>{{ item.name }}</td>
@@ -68,20 +77,29 @@ import { environment } from '../../../environments/environment';
 })
 export class ListInventoryComponent implements OnInit {
 
+  // Holds the inventory items returned from the API
   items: any[] = [];
+
   loading = true;
+
+  // Stores any error message from the API call
   errorMessage = '';
 
   constructor(private http: HttpClient) {}
 
+  /**
+  * Method that runs once when the component loads.
+  * Makes an HTTP GET request to fetch inventory data.
+  */
+
   ngOnInit(): void {
     this.http.get<any[]>(`${environment.apiBaseUrl}/api/inventory`).subscribe({
       next: (data) => {
-        this.items = data;
-        this.loading = false;
+        this.items = data; // Save returned items
+        this.loading = false; // Stop loading indicator
       },
       error: () => {
-        this.errorMessage = 'Failed to load inventory items.';
+        this.errorMessage = 'Failed to load inventory items.'; // Display error
         this.loading = false;
       }
     });
