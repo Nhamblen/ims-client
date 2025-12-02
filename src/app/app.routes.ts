@@ -9,6 +9,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout/main-layout.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
+import { ListInventoryComponent } from './list_inventory/list-inventory/list-inventory.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'inventory',
         component: InventoryItemComponent,
+      },
+      {
+        path: 'reports',
+        component: ListInventoryComponent,
       },
       {
         path: 'reports',
