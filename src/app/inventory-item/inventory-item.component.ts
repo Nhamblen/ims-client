@@ -126,7 +126,7 @@ export class InventoryItemComponent {
   successMessage = '';
   errorMessage = '';
 
-  // Use the same base URL pattern as ListInventoryComponent
+  // base URL for API
   private apiUrl = `${environment.apiBaseUrl}/api/inventory`;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
