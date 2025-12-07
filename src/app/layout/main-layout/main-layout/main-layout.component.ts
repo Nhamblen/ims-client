@@ -113,7 +113,7 @@ export class MainLayoutComponent {
     { label: 'Home', url: '/dashboard' },
     { label: 'Create Inventory Item', url: '/inventory' },
     { label: 'List Inventory Items',   url: '/reports' },
-    { label: 'Delete Inventory Item',  url: '/settings' }
+    { label: 'Inventory Item by Id',  url: '/inventory-by-id' },
   ];
 
   toggleMobileNav(): void {
