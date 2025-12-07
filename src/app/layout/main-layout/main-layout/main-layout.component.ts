@@ -113,6 +113,7 @@ export class MainLayoutComponent {
     { label: 'Home', url: '/dashboard' },
     { label: 'Create Inventory Item', url: '/inventory' },
     { label: 'List Inventory Items',   url: '/reports' },
+    { label: 'Update Inventory Items',   url: '/update' },
     { label: 'Delete Inventory Item',  url: '/settings' }
   ];
 

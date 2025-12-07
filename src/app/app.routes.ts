@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout/main-layout.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { ListInventoryComponent } from './list_inventory/list-inventory/list-inventory.component';
+import { InventoryUpdateComponent } from './inventory-update/inventory-update.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,10 @@ export const routes: Routes = [
       {
         path: 'reports',
         component: ListInventoryComponent,
+      },
+      {
+        path: 'update',
+        component: InventoryUpdateComponent,
       },
       {
         path: 'reports',
