@@ -14,6 +14,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-inventory-item',
@@ -67,7 +68,7 @@ import { HttpClient } from '@angular/common/http';
       <div>
         <label for="price">Price</label>
         <input id="price" type="number" step="0.01" formControlName="price" />
-        <div *ngIf="f['price'].touched && f['price'].invalid">
+        <div *ngIf='f["price"].touched && f["price"].invalid'>
           <small class="error">Price must be 0 or greater.</small>
         </div>
       </div>
@@ -125,6 +126,9 @@ export class InventoryItemComponent {
   successMessage = '';
   errorMessage = '';
 
+  // base URL for API
+  private apiUrl = `${environment.apiBaseUrl}/api/inventory`;
+
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.inventoryForm = this.fb.group({
       categoryId: ['', Validators.required],
@@ -153,13 +157,15 @@ export class InventoryItemComponent {
 
     this.isSubmitting = true;
 
-    this.http.post('/api/inventory', this.inventoryForm.value).subscribe({
+    this.http.post(this.apiUrl, this.inventoryForm.value).subscribe({
       next: () => {
         this.isSubmitting = false;
         this.successMessage = 'Inventory item created successfully.';
         this.inventoryForm.reset();
       },
-      error: () => {
+      error: (err) => {
+        console.error('Create inventory error (full):', err);
+        console.error('Backend error payload:', err.error);
         this.isSubmitting = false;
         this.errorMessage =
           'Failed to create inventory item. Please try again.';

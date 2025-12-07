@@ -11,6 +11,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout/main-layou
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { ListInventoryComponent } from './list_inventory/list-inventory/list-inventory.component';
 import { InventoryUpdateComponent } from './inventory-update/inventory-update.component';
+import { InventoryItemByIdComponent } from './Inventory_id/inventory-item-detail/inventory-item-by-id.component';
 
 export const routes: Routes = [
   {
@@ -42,8 +43,8 @@ export const routes: Routes = [
         component: InventoryUpdateComponent,
       },
       {
-        path: 'reports',
-        component: HomeComponent, // replace later
+        path: 'inventory-by-id',
+        component: InventoryItemByIdComponent,
       },
       {
         path: 'settings',
