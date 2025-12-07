@@ -45,8 +45,8 @@ import { environment } from '../../../environments/environment';
               <td>{{ item.name }}</td>
               <td>{{ item.quantity }}</td>
               <td>{{ item.price | currency }}</td>
-              <td>{{ item.category_id }}</td>
-              <td>{{ item.supplier_id }}</td>
+              <td>{{ item.categoryId }}</td>
+              <td>{{ item.supplierId }}</td>
             </tr>
           }
         </tbody>
