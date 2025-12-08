@@ -8,6 +8,8 @@
 
 import { Component, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { InventoryItemComponent } from '../../../inventory-item/inventory-item.component';
+import { CommonModule } from '@angular/common';
 
 interface NavItem {
   label: string;
@@ -17,7 +19,7 @@ interface NavItem {
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, InventoryItemComponent, CommonModule, RouterLink],
   template: `
     <div class="app-shell">
       <!-- Sidebar (hidden on small screens via CSS) -->
@@ -50,6 +52,21 @@ interface NavItem {
 
       <!-- Main area -->
       <main class="main">
+
+          @if (showModal) {
+            <!-- Background overlay -->
+            <div class="modal-backdrop" (click)="closeModal()"></div>
+
+            <!-- Modal container -->
+            <div class="modal">
+
+              <!-- John's existing create component -->
+              <app-inventory-item></app-inventory-item>
+
+              <button class="button" id="modal-btn" (click)="closeModal()">Close</button>
+            </div>
+          }
+
         <!-- Top bar -->
         <header class="topbar">
           <div class="topbar__left">
@@ -74,8 +91,8 @@ interface NavItem {
           </div>
 
           <div class="topbar__right">
-            <button class="button button--outline" routerLink="/inventory/add">
-              Add Item
+            <button class="button button--outline" (click)="openModal()">
+            Add Item
             </button>
             <button class="icon-button" aria-label="User settings">👤</button>
           </div>
@@ -133,4 +150,14 @@ export class MainLayoutComponent {
       this.isMobileNavOpen = false;
     }
   }
+
+  showModal = false;
+
+openModal() {
+  this.showModal = true;
+}
+
+closeModal() {
+  this.showModal = false;
+}
 }
