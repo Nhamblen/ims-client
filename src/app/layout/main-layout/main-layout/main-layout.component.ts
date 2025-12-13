@@ -60,7 +60,7 @@ interface NavItem {
             <!-- Modal container -->
             <div class="modal">
 
-              <!-- John's existing create component -->
+              <!-- Existing create component -->
               <app-inventory-item></app-inventory-item>
 
               <button class="button" id="modal-btn" (click)="closeModal()">Close</button>
@@ -131,9 +131,9 @@ export class MainLayoutComponent {
     { label: 'Create Inventory Item', url: '/inventory' },
     { label: 'List Inventory Items',   url: '/reports' },
     { label: 'Update Inventory Items',   url: '/update' },
-    { label: 'Delete Inventory Item',  url: '/settings' },
     { label: 'Inventory Item by Id',  url: '/inventory-by-id' },
-    { label: 'Search Inventory',  url: '/search' }
+    { label: 'Search Inventory',  url: '/search' },
+    { label: 'Delete Inventory Item',  url: '/delete-inventory-item' }
   ];
 
   toggleMobileNav(): void {
