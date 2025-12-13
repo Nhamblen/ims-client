@@ -132,7 +132,8 @@ export class MainLayoutComponent {
     { label: 'List Inventory Items',   url: '/reports' },
     { label: 'Update Inventory Items',   url: '/update' },
     { label: 'Delete Inventory Item',  url: '/settings' },
-    { label: 'Inventory Item by Id',  url: '/inventory-by-id' }
+    { label: 'Inventory Item by Id',  url: '/inventory-by-id' },
+    { label: 'Search Inventory',  url: '/search' }
   ];
 
   toggleMobileNav(): void {
