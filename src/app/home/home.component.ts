@@ -75,12 +75,6 @@ import { environment } from '../../environments/environment';
            </figure>
           </div>
         </div>
-        <div class="hero__server-message">
-          <span class="hero__server-label">Server status:</span>
-          <span class="hero__server-value">
-            {{ serverMessage || 'Loading server message...' }}
-          </span>
-        </div>
       </div>
       <div class="hero__images">
       </div>
