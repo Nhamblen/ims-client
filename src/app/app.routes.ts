@@ -12,6 +12,8 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
 import { ListInventoryComponent } from './list_inventory/list-inventory/list-inventory.component';
 import { InventoryUpdateComponent } from './inventory-update/inventory-update.component';
 import { InventoryItemByIdComponent } from './Inventory_id/inventory-item-detail/inventory-item-by-id.component';
+import { SearchInventoryComponent } from './search-inventory/search-inventory.component';
+import { DeleteInventoryItemComponent } from './inventory-delete/delete-inventory-item/delete-inventory-item.component';
 
 export const routes: Routes = [
   {
@@ -46,9 +48,13 @@ export const routes: Routes = [
         path: 'inventory-by-id',
         component: InventoryItemByIdComponent,
       },
+            {
+        path: 'search',
+        component: SearchInventoryComponent,
+      },
       {
-        path: 'settings',
-        component: HomeComponent, // replace later
+        path: 'delete-inventory-item',
+        component: DeleteInventoryItemComponent,
       },
     ],
   },

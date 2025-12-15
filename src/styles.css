@@ -20,16 +20,16 @@ body {
    ============================== */
 
 :root {
-  --bg-body: #e3edf9;          /* soft blue page background */
-  --bg-surface: #f9fafb;       /* main cards / surfaces */
-  --bg-surface-alt: #eef2ff;   /* subtle alternate background with a hint of indigo */
-  --bg-accent: #2563eb;        /* primary accent (buttons, highlights) */
+  --bg-body: #e3edf9; /* soft blue page background */
+  --bg-surface: #f9fafb; /* main cards / surfaces */
+  --bg-surface-alt: #eef2ff; /* subtle alternate background with a hint of indigo */
+  --bg-accent: #2563eb; /* primary accent (buttons, highlights) */
   --bg-accent-soft: rgba(37, 99, 235, 0.16);
 
-  --border-soft: #d1d5db;      /* light border */
+  --border-soft: #d1d5db; /* light border */
   --border-strong: #9ca3af;
 
-  --text-main: #0f172a;        /* deep slate */
+  --text-main: #0f172a; /* deep slate */
   --text-muted: #6b7280;
   --text-subtle: #9ca3af;
   --text-on-accent: #ffffff;
@@ -41,8 +41,14 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top left, #dbeafe 0, #e3edf9 40%, #f3f4f6 100%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(
+    circle at top left,
+    #dbeafe 0,
+    #e3edf9 40%,
+    #f3f4f6 100%
+  );
   color: var(--text-main);
   line-height: 1.5;
 }
@@ -108,7 +114,12 @@ html {
   width: 32px;
   height: 32px;
   border-radius: 0.75rem;
-  background: radial-gradient(circle at 30% 30%, #93c5fd, #3b82f6 45%, #1d4ed8 100%);
+  background: radial-gradient(
+    circle at 30% 30%,
+    #93c5fd,
+    #3b82f6 45%,
+    #1d4ed8 100%
+  );
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -149,10 +160,7 @@ html {
   color: #d1d5db;
   font-size: 0.9rem;
   text-decoration: none;
-  transition:
-    background 150ms ease,
-    color 150ms ease,
-    transform 150ms ease;
+  transition: background 150ms ease, color 150ms ease, transform 150ms ease;
 }
 
 .sidebar__link-icon {
@@ -227,6 +235,32 @@ html {
   color: var(--text-muted);
 }
 
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2rem;
+  width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+#modal-btn {
+  margin-top: 1rem;
+}
+
 /* Hamburger button – hidden on desktop by default */
 .topbar__menu-button {
   display: none; /* enabled in media query for small screens */
@@ -274,9 +308,7 @@ html {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  transition:
-    background 150ms ease,
-    color 150ms ease;
+  transition: background 150ms ease, color 150ms ease;
 }
 
 .mobile-nav__link:hover {
@@ -297,14 +329,17 @@ html {
   border-radius: 1rem;
   border: 1px solid var(--border-soft);
   padding: 1.25rem 1.5rem;
-  box-shadow:
-    0 12px 25px rgba(15, 23, 42, 0.06),
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.06),
     0 0 0 1px rgba(148, 163, 184, 0.12);
 }
 
 .card--highlight {
   border: 1px solid rgba(37, 99, 235, 0.4);
-  background: radial-gradient(circle at top left, rgba(191, 219, 254, 0.85), #ffffff 55%);
+  background: radial-gradient(
+    circle at top left,
+    rgba(191, 219, 254, 0.85),
+    #ffffff 55%
+  );
 }
 
 .card__header {
@@ -367,10 +402,7 @@ html {
   cursor: pointer;
   background: var(--bg-accent);
   color: var(--text-on-accent);
-  transition:
-    background 150ms ease,
-    transform 120ms ease,
-    box-shadow 150ms ease,
+  transition: background 150ms ease, transform 120ms ease, box-shadow 150ms ease,
     border-color 150ms ease;
 }
 
@@ -425,12 +457,8 @@ html {
   justify-content: center;
   cursor: pointer;
   color: var(--text-muted);
-  transition:
-    background 150ms ease,
-    border-color 150ms ease,
-    transform 120ms ease,
-    color 150ms ease,
-    box-shadow 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease,
+    transform 120ms ease, color 150ms ease, box-shadow 150ms ease;
 }
 
 .icon-button:hover {
@@ -472,9 +500,7 @@ textarea {
   font-size: 0.9rem;
   color: var(--text-main);
   outline: none;
-  transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease,
+  transition: border-color 150ms ease, box-shadow 150ms ease,
     background 150ms ease;
 }
 
