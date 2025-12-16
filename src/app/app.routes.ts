@@ -13,6 +13,7 @@ import { ListInventoryComponent } from './list_inventory/list-inventory/list-inv
 import { InventoryUpdateComponent } from './inventory-update/inventory-update.component';
 import { InventoryItemByIdComponent } from './Inventory_id/inventory-item-detail/inventory-item-by-id.component';
 import { SearchInventoryComponent } from './search-inventory/search-inventory.component';
+import { ListSupplierComponent } from './list-supplier/list-supplier.component';
 import { DeleteInventoryItemComponent } from './inventory-delete/delete-inventory-item/delete-inventory-item.component';
 
 export const routes: Routes = [
@@ -55,6 +56,10 @@ export const routes: Routes = [
       {
         path: 'delete-inventory-item',
         component: DeleteInventoryItemComponent,
+      },
+            {
+        path: 'list-supplier',
+        component: ListSupplierComponent,
       },
     ],
   },

@@ -11,6 +11,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { environment } from '../../environments/environment';
 
 describe('InventoryItemComponent', () => {
   let component: InventoryItemComponent;
@@ -49,33 +50,35 @@ describe('InventoryItemComponent', () => {
 
   // TEST 3: Should send POST request when form is valid and handle success
   it('should send POST request and set success message when form is valid', () => {
-    // Arrange: set valid form values
+    const fixture = TestBed.createComponent(InventoryItemComponent);
+    const component = fixture.componentInstance;
+
+    // Fill out the form with valid data
     component.inventoryForm.setValue({
       categoryId: 1,
       supplierId: 100,
-      name: 'Test Item From Component',
-      description: 'A test item created from the component',
-      quantity: 10,
-      price: 9.99,
+      name: 'Test Item',
+      description: 'Test description',
+      quantity: 5,
+      price: 10.99
     });
 
-    // Act: submit the form
+    // Submit the form
     component.onSubmit();
 
-    // Assert: HTTP request was sent
-    const req = httpMock.expectOne('/api/inventory');
+    // Expect POST request
+    const req = httpMock.expectOne(`${environment.apiBaseUrl}/api/inventory`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body.name).toBe('Test Item From Component');
 
-    // Simulate a successful response from the backend
-    req.flush({
-      _id: '123',
-      ...req.request.body,
-    });
+    // Simulate successful response
+    req.flush({});
 
-    // After success
+    // Assertions
+    expect(component.successMessage).toBe('Inventory item created successfully.');
     expect(component.isSubmitting).toBeFalse();
-    expect(component.successMessage).toContain('created successfully');
-    expect(component.errorMessage).toBe('');
   });
-});
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+  });
