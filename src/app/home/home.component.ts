@@ -26,7 +26,7 @@ import { environment } from '../../environments/environment';
           <img
             src="../assets/images/cloud_image.jpg"
             alt="Cloud hosted preview"
-            [style.width.px]="225"
+            [style.width.px]="220"
             style="height: auto;"
           />
            </figure>
@@ -39,7 +39,7 @@ import { environment } from '../../environments/environment';
             <figure class="hero__image-card hero__image-card--secondary">
           <img
             src="../assets/images/streamline_image.jpg"
-            alt="Cloud hosted preview"
+            alt="Streamlined Workflows preview"
             [style.width.px]="225"
             style="height: auto;"
           />
@@ -54,7 +54,7 @@ import { environment } from '../../environments/environment';
             <figure class="hero__image-card hero__image-card--secondary">
           <img
             src="../assets/images/mean.jpg"
-            alt="Cloud hosted preview"
+            alt="Scalable Foundation preview"
             [style.width.px]="235"
             style="height: auto;"
           />
@@ -68,7 +68,7 @@ import { environment } from '../../environments/environment';
             <figure class="hero__image-card hero__image-card--secondary">
           <img
             src="../assets/images/custom.jpg"
-            alt="Cloud hosted preview"
+            alt="Customizable Features preview"
             [style.width.px]="225"
             style="height: auto;"
           />

@@ -15,6 +15,7 @@ import { InventoryItemByIdComponent } from './Inventory_id/inventory-item-detail
 import { SearchInventoryComponent } from './search-inventory/search-inventory.component';
 import { ListSupplierComponent } from './list-supplier/list-supplier.component';
 import { DeleteInventoryItemComponent } from './inventory-delete/delete-inventory-item/delete-inventory-item.component';
+import { SupplierCreateComponent } from './supplier-create/supplier-create.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,10 @@ export const routes: Routes = [
             {
         path: 'list-supplier',
         component: ListSupplierComponent,
+      },
+      {
+        path: 'add-supplier',
+        component: SupplierCreateComponent,
       },
     ],
   },

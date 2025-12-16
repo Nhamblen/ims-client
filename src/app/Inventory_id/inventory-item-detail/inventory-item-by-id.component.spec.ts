@@ -6,8 +6,10 @@
  */
 
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { InventoryItemByIdComponent } from './inventory-item-by-id.component';
 import { environment } from '../../../environments/environment';
 
@@ -16,7 +18,7 @@ describe('InventoryItemByIdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InventoryItemByIdComponent, HttpClientTestingModule, ReactiveFormsModule],
+      imports: [InventoryItemByIdComponent, HttpClientTestingModule],
     }).compileComponents();
 
     httpMock = TestBed.inject(HttpTestingController);
@@ -27,91 +29,113 @@ describe('InventoryItemByIdComponent', () => {
   });
 
   /**
-   * 1. Should create and NOT call API before submit
+   * 1. Should not submit when form is invalid
    */
-  it('should create and not call API before submit', () => {
+  it('should not submit when form is invalid', () => {
     const fixture = TestBed.createComponent(InventoryItemByIdComponent);
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
 
-    // No outstanding HTTP calls yet
+    // Form starts with empty searchValue, so invalid
+    component.onSubmit();
+
+    // No HTTP requests should be made
     httpMock.expectNone(() => true);
-    expect(component).toBeTruthy();
-    expect(component.item).toBeNull();
+
     expect(component.errorMessage).toBe('');
+    expect(component.item).toBeNull();
+    expect(component.items.length).toBe(0);
   });
 
   /**
-   * 2. Should call API and set item on successful load
+   * 2. Should call /api/inventory/:id and show single item when searching by ID
    */
-  it('should call API and set item on successful load', () => {
+  it('should call API by ID and set item on success', () => {
     const fixture = TestBed.createComponent(InventoryItemByIdComponent);
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
 
-    // Set a valid ID in the form
-    const testId = '507f1f77bcf86cd799439011';
-    component.idForm.setValue({ id: testId });
-
-    component.onSubmit();
-
-    const req = httpMock.expectOne(
-      `${environment.apiBaseUrl}/api/inventory/${testId}`
-    );
-    expect(req.request.method).toBe('GET');
-
-    // Mock successful response
-    req.flush({
-      _id: testId,
-      categoryId: 1,
-      supplierId: 2,
-      name: 'Test Item',
-      description: 'Test description',
-      quantity: 10,
-      price: 9.99,
+    component.idForm.setValue({
+      searchType: 'id',
+      searchValue: 'abc123id',
     });
 
+    component.onSubmit();
+
+    const req = httpMock.expectOne(
+      `${environment.apiBaseUrl}/api/inventory/abc123id`
+    );
+    expect(req.request.method).toBe('GET');
+
+    const mockItem = {
+      _id: 'abc123id',
+      categoryId: 1,
+      supplierId: 100,
+      name: 'Test Item',
+      description: 'Desc',
+      quantity: 5,
+      price: 9.99,
+    };
+
+    req.flush(mockItem);
+
     expect(component.isLoading).toBeFalse();
     expect(component.errorMessage).toBe('');
-    expect(component.item).toEqual(
-      jasmine.objectContaining({
-        _id: testId,
-        name: 'Test Item',
-        quantity: 10,
-        price: 9.99,
-      })
-    );
+    expect(component.item).toEqual(mockItem as any);
+    expect(component.items.length).toBe(1);
   });
 
   /**
-   * 3. Should set errorMessage on 404 error
+   * 3. Should call search endpoint and show multiple items when searching by Category ID
    */
-  it('should set errorMessage when API returns 404', () => {
+  it('should call search API by Category ID and set items on success', () => {
     const fixture = TestBed.createComponent(InventoryItemByIdComponent);
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
 
-    const testId = '507f1f77bcf86cd799439022';
-    component.idForm.setValue({ id: testId });
+    component.idForm.setValue({
+      searchType: 'categoryId',
+      searchValue: '1',
+    });
 
     component.onSubmit();
 
     const req = httpMock.expectOne(
-      `${environment.apiBaseUrl}/api/inventory/${testId}`
+      (request) =>
+        request.url === `${environment.apiBaseUrl}/api/inventory/search` &&
+        request.params.get('categoryId') === '1'
     );
     expect(req.request.method).toBe('GET');
 
-    // Mock 404 response
-    req.flush(
-      { message: 'Inventory item not found' },
-      { status: 404, statusText: 'Not Found' }
-    );
+    const mockItems = [
+      {
+        _id: 'id1',
+        categoryId: 1,
+        supplierId: 100,
+        name: 'Category Item 1',
+        description: 'First',
+        quantity: 10,
+        price: 19.99,
+      },
+      {
+        _id: 'id2',
+        categoryId: 1,
+        supplierId: 101,
+        name: 'Category Item 2',
+        description: 'Second',
+        quantity: 3,
+        price: 29.99,
+      },
+    ];
+
+    req.flush(mockItems);
 
     expect(component.isLoading).toBeFalse();
-    expect(component.item).toBeNull();
-    expect(component.errorMessage).toBe('Inventory item not found.');
+    expect(component.errorMessage).toBe('');
+    expect(component.item).toBeNull(); // multiple results → table view
+    expect(component.items.length).toBe(2);
   });
 });
